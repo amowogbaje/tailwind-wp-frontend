@@ -6,7 +6,7 @@ const WP = "https://blog.amowogbaje.com";
 // ----------------------
 export async function getPosts(limit = 9) {
   try {
-    const res = await fetch(`${WP}/wp-json/wp/v2/posts?_embed&per_page=${limit}`, { cache: "no-store" });
+    const res = await fetch(`${WP}/wp-json/wp/v2/posts?_embed&per_page=${limit}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -20,7 +20,7 @@ export async function getPosts(limit = 9) {
 // ----------------------
 export async function getPost(slug: string) {
   try {
-    const res = await fetch(`${WP}/wp-json/wp/v2/posts?slug=${slug}&_embed`, { cache: "no-store" });
+    const res = await fetch(`${WP}/wp-json/wp/v2/posts?slug=${slug}&_embed`);
     if (!res.ok) return null;
     const data = await res.json();
     return Array.isArray(data) && data.length ? data[0] : null;
@@ -35,7 +35,7 @@ export async function getPost(slug: string) {
 // ----------------------
 export async function getFeaturedPosts(limit = 5) {
   try {
-    const res = await fetch(`${WP}/wp-json/wp/v2/posts?sticky=true&_embed&per_page=${limit}`, { cache: "no-store" });
+    const res = await fetch(`${WP}/wp-json/wp/v2/posts?sticky=true&_embed&per_page=${limit}`);
     if (!res.ok) return [];
     return await res.json();
   } catch (err) {
@@ -49,7 +49,7 @@ export async function getFeaturedPosts(limit = 5) {
 // ----------------------
 export async function getCategoryBySlug(slug: string) {
   try {
-    const res = await fetch(`${WP}/wp-json/wp/v2/categories?slug=${slug}`, { cache: "no-store" });
+    const res = await fetch(`${WP}/wp-json/wp/v2/categories?slug=${slug}`);
     if (!res.ok) return null;
     const data = await res.json();
     return Array.isArray(data) && data.length ? data[0] : null;
@@ -74,7 +74,7 @@ export async function getPostsByCategorySlug(slug: string, limit = 5, stickyOnly
     });
     if (stickyOnly) params.append("sticky", "true");
 
-    const res = await fetch(`${WP}/wp-json/wp/v2/posts?${params.toString()}`, { cache: "no-store" });
+    const res = await fetch(`${WP}/wp-json/wp/v2/posts?${params.toString()}`);
     if (!res.ok) return [];
     return await res.json();
   } catch (err) {
@@ -88,7 +88,7 @@ export async function getPostsByCategorySlug(slug: string, limit = 5, stickyOnly
 export async function getRelatedPostsById(postId: number, limit = 3) {
   try {
     // Step 1: Fetch the current post to get its categories
-    const resPost = await fetch(`${WP}/wp-json/wp/v2/posts/${postId}?_embed`, { cache: "no-store" });
+    const resPost = await fetch(`${WP}/wp-json/wp/v2/posts/${postId}?_embed`);
     if (!resPost.ok) return [];
     const post = await resPost.json();
 
@@ -102,13 +102,41 @@ export async function getRelatedPostsById(postId: number, limit = 3) {
       exclude: String(postId),
     });
 
-    const resRelated = await fetch(`${WP}/wp-json/wp/v2/posts?${params.toString()}`, { cache: "no-store" });
+    const resRelated = await fetch(`${WP}/wp-json/wp/v2/posts?${params.toString()}`);
     if (!resRelated.ok) return [];
 
     const relatedPosts = await resRelated.json();
     return Array.isArray(relatedPosts) ? relatedPosts.slice(0, limit) : [];
   } catch (err) {
     console.error("getRelatedPostsById failed:", err);
+    return [];
+  }
+}
+
+
+export async function getAllPostSlugs() {
+  try {
+    const res = await fetch(`${WP}/wp-json/wp/v2/posts?per_page=100&_fields=slug`);
+    if (!res.ok) return [];
+    const posts = await res.json();
+    return Array.isArray(posts) ? posts.map((p: any) => p.slug) : [];
+  } catch (err) {
+    console.error("getAllPostSlugs failed:", err);
+    return [];
+  }
+}
+
+// ----------------------
+// Fetch all category slugs for static generation
+// ----------------------
+export async function getAllCategorySlugs() {
+  try {
+    const res = await fetch(`${WP}/wp-json/wp/v2/categories?per_page=100&_fields=slug`);
+    if (!res.ok) return [];
+    const categories = await res.json();
+    return Array.isArray(categories) ? categories.map((c: any) => c.slug) : [];
+  } catch (err) {
+    console.error("getAllCategorySlugs failed:", err);
     return [];
   }
 }
