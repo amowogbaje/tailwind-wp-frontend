@@ -48,20 +48,25 @@ const wpClassMappings: Record<string, string> = {
 /**
  * Converts Gutenberg HTML content into React elements with Tailwind classes
  */
+
+// ... your wpClassMappings remain the same ...
+
 export const cleanHtml = (html: string) => {
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
-      if (!(domNode instanceof Element)) return;
+      // FIX: Instead of 'instanceof Element', check if it's a tag
+      // html-react-parser nodes have a 'type' property
+      if (domNode.type !== 'tag') return;
 
-      if (domNode.attribs) {
+      const element = domNode as Element;
+
+      if (element.attribs) {
         let appliedClass = '';
-
-        // Handle dynamic WP class prefixes
-        if (domNode.attribs.class) {
-          const classes = domNode.attribs.class.split(' ');
-
+        
+        // 1. Handle dynamic WP class prefixes
+        if (element.attribs.class) {
+          const classes = element.attribs.class.split(' ');
           for (const c of classes) {
-            // Match prefix
             for (const prefix in wpClassMappings) {
               if (c.startsWith(prefix)) {
                 appliedClass = wpClassMappings[prefix];
@@ -72,26 +77,26 @@ export const cleanHtml = (html: string) => {
           }
         }
 
-        // Fallback to tag name mapping
-        if (!appliedClass && wpClassMappings[domNode.name]) {
-          appliedClass = wpClassMappings[domNode.name];
+        // 2. Fallback to tag name mapping
+        if (!appliedClass && wpClassMappings[element.name]) {
+          appliedClass = wpClassMappings[element.name];
         }
 
         if (appliedClass) {
-          domNode.attribs.className = appliedClass;
+          element.attribs.className = appliedClass;
         }
 
-        // Remove original class & style
-        delete domNode.attribs.class;
-        delete domNode.attribs.style;
+        // 3. Clean up
+        delete element.attribs.class;
+        delete element.attribs.style;
       }
 
-      // Recursively render children
-      if (domNode.children && domNode.children.length > 0) {
+      // 4. Recursively render children
+      if (element.children && element.children.length > 0) {
         return React.createElement(
-          domNode.name,
-          domNode.attribs,
-          domToReact(domNode.children, options)
+          element.name,
+          element.attribs,
+          domToReact(element.children as any, options)
         );
       }
     },
