@@ -18,7 +18,7 @@ export const menuData = [
     name: "Blog",
     submenu: [
       { name: "Healthy Lifestyle", link: "/blogs/healthy-lifestyle" },
-      { name: "Healthy Eating", link: "/blogs/healthy-eatings" },
+      { name: "Healthy Eating", link: "/blogs/healthy-eating" },
       { name: "Physical Activity", link: "/blogs/physical-activity" },
       { name: "Emotional Health", link: "/blogs/emotional-health" },
       { name: "Soul and Spirit", link: "/blogs/soul-and-spirit" },
