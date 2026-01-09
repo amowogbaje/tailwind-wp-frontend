@@ -6,6 +6,7 @@ import {
   getAllPostSlugs,
   getAllCategorySlugs,
 } from "@/lib/wp-api";
+import { redirect } from "next/navigation";
 import BlogGrid from "@/components/blog/BlogGrid";
 import BlogHero from "@/components/blog/BlogHero";
 import { BlogDetailHero } from "@/components/blog/BlogDetailHero";
@@ -60,11 +61,7 @@ export default async function BlogDetail({ params }: { params: Promise<{ slug: s
   const post = await getPost(slug);
 
   if (!post) {
-    return (
-      <div className="py-32 text-center">
-        <h1 className="text-3xl font-semibold">Not found</h1>
-      </div>
-    );
+    redirect("/404");
   }
 
   const relatedPosts = await getRelatedPostsById(post.id);
