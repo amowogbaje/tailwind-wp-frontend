@@ -1,0 +1,13 @@
+ErrorDocument 404 /404/index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # If the request is not a real file or directory, 
+  # and it's within the blogs path, let it try to find the HTML file
+  # or fall back to the 404 page.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^blogs/(.*)$ /404/index.html [L]
+</IfModule>
