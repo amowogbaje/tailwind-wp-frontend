@@ -25,6 +25,7 @@ export const menuData = [
       { name: "General Health Topics", link: "/blogs/general-health-topics" },
       { name: "Men and Women Health", link: "/blogs/men-and-women-health" },
       { name: "Health Conditions", link: "/blogs/health-conditions" },
+      
     ],
   },
   { name: "Contact Us", link: "#" },
