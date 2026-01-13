@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://maxlifecenter.org/
+
+# Sitemaps
+Sitemap: https://maxlifecenter.org/sitemap.xml

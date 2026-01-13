@@ -12,6 +12,9 @@ const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "500", "600"
 export const metadata: Metadata = {
   title: "MaxiLife",
   description: "Helping you live your best life with personalized health insights.",
+  alternates: {
+    canonical: "https://maxilife.com",
+  },
 };
 
 export default function RootLayout({

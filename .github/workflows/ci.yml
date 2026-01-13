@@ -19,6 +19,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Build Sitemap
+        run: npm run postbuild
+
       - name: Sync files to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
