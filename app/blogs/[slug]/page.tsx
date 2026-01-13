@@ -12,6 +12,8 @@ import BlogHero from "@/components/blog/BlogHero";
 import { BlogDetailHero } from "@/components/blog/BlogDetailHero";
 import { BlogContent } from "@/components/blog/BlogContent";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
+import { Metadata } from "next";
+
 
 // 1. Required for 'output: export': Tells Next.js to 404 if a slug wasn't generated at build time
 export const dynamicParams = false;
@@ -29,6 +31,32 @@ export async function generateStaticParams() {
   }));
 
   return allPaths;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const category = await getCategoryBySlug(slug);
+  if (category) {
+    return {
+      title: `${category.name} | MaxiLife`,
+      description: `Explore articles under the ${category.name} category.`,
+      alternates: { canonical: `https://maxilife.com/blogs/${slug}` },
+    };
+  }
+
+  const post = await getPost(slug);
+  if (post) {
+    return {
+      title: post.title.rendered,
+      description: post.excerpt?.rendered?.replace(/<[^>]+>/g, "") || "Read this article on MaxiLife.",
+      alternates: { canonical: `https://maxilife.com/blogs/${slug}` },
+    };
+  }
+
+  return {
+    title: "Page Not Found | MaxiLife",
+    description: "The page you are looking for does not exist.",
+  };
 }
 
 export default async function BlogDetail({ params }: { params: Promise<{ slug: string }> }) {

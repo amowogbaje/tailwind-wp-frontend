@@ -6,7 +6,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Blog | MaxiLife",
   description: "Read the latest insights and articles on health and lifestyle.",
-  alternates: { canonical: "https://maxilife.com/blog" },
+  alternates: { canonical: "https://maxilife.com/blogs" },
 };
 
 export default async function BlogLanding() {
@@ -45,7 +45,7 @@ export default async function BlogLanding() {
             "@type": "CollectionPage",
             "name": "Blog | MaxiLife",
             "description": "Read the latest insights and articles on health and lifestyle.",
-            "url": "https://maxilife.com/blog"
+            "url": "https://maxilife.com/blogs"
           }),
         }}
       />
