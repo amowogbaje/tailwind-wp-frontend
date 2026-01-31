@@ -1,13 +1,14 @@
 // menuData.ts
 export const menuData = [
-  { name: "Home", link: "#" },
+  { name: "Home", link: "/" },
   { name: "About Us", link: "#" },
   {
     name: "Our Services",
     submenu: [
       { name: "Health Education and Promotion", link: "/services/health-education" },
-      { name: "Health and Wellness Counselling", link: "#" },
-      // { name: "Basic and Comprehensive Health Assessments and Screenings", link: "#" },
+      // { name: "Health and Wellness Counselling", link: "#" },
+      // { name: "Basic and Comprehensive Health Assessments and Screenings", link: "/services/health-assessment" },
+      { name: "Health Assessments and Screenings", link: "/services/health-assessment" },
       { name: "Health Coaching and Lifestyle Modification Support", link: "/services/health-coaching" },
       { name: "Health Condition Management Support", link: "/services/hcms" },
       { name: "Sexual and Reproductive Health Counselling (for adolescents and young adults)", link: "#" },
