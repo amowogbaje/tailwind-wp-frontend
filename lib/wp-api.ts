@@ -15,6 +15,21 @@ export async function getPosts(limit = 9) {
   }
 }
 
+export async function searchPosts(query: string) {
+  if (!query) return [];
+  try {
+    // We fetch slug and title to build the link
+    const res = await fetch(
+      `${WP}/wp-json/wp/v2/posts?search=${encodeURIComponent(query)}&per_page=5&_fields=id,title,slug`
+    );
+    if (!res.ok) throw new Error(`Search failed: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("searchPosts failed:", err);
+    return [];
+  }
+}
+
 // ----------------------
 // Single post by slug
 // ----------------------

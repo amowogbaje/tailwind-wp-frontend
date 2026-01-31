@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { 
   BookOpen, 
@@ -14,6 +15,7 @@ import {
   Globe,
   LucideIcon
 } from 'lucide-react';
+import BlogSearch from '@/components/blog/BlogSearch';
 
 // --- Interfaces ---
 
@@ -71,7 +73,7 @@ const HealthEducationPage: React.FC = () => {
     <main className="bg-white font-sans text-slate-800 antialiased">
       
       {/* --- HERO SECTION --- */}
-      <section className="relative py-24 bg-slate-50 overflow-hidden border-b border-slate-100">
+      <section className="relative py-24 bg-slate-50 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="flex flex-col items-center text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-widest mb-8">
@@ -88,16 +90,7 @@ const HealthEducationPage: React.FC = () => {
           </div>
 
           {/* Search/Filter Simulation */}
-          <div className="max-w-2xl mx-auto relative group">
-            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-              <Search className="text-slate-400 group-focus-within:text-blue-500 transition-colors" size={20} />
-            </div>
-            <input 
-              type="text" 
-              placeholder="Search for diabetes, nutrition, heart health..." 
-              className="w-full pl-14 pr-6 py-5 bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-200/50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-lg"
-            />
-          </div>
+          <BlogSearch />
         </div>
       </section>
 
