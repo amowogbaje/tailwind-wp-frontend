@@ -9,14 +9,14 @@ const Footer: React.FC = () => {
                 {/* Footer Columns */}
                 <div className="flex flex-wrap gap-8">
 
-                    {/* About MaxiLife */}
+                    {/* About MaxLife */}
                     <div className="flex-1 min-w-[250px]">
                         <h3 className="text-lg font-bold mb-4 text-gray-100">
-                            ABOUT <span className="text-blue-400">MAXILIFE</span>
+                            ABOUT <span className="text-blue-400">MAXLIFE</span>
                         </h3>
                         <div className="w-12 h-1 bg-blue-400 mb-6 rounded"></div>
                         <p className="text-gray-400 text-sm leading-relaxed">
-                            MaxiLife Health and Wellness is dedicated to helping you achieve optimal health through
+                            MaxLife Health and Wellness is dedicated to helping you achieve optimal health through
                             evidence-based guidance, support, and resources. Our mission is to empower individuals
                             on their journey toward healthier living and sustainable wellness practices.
                         </p>
@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
 
                 {/* Footer Bottom */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-gray-700 pt-6 text-sm text-gray-500">
-                    <p>&copy; 2016-2025 MaxiLife Health and Wellness. All rights reserved.</p>
+                    <p>&copy; 2016-2025 MaxLife Health and Wellness. All rights reserved.</p>
                     <div className="flex gap-6 flex-wrap justify-center md:justify-end">
                         {["Privacy Policy", "Terms of Use", "Contact Us"].map((link) => (
                             <a

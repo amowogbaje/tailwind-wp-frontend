@@ -36,10 +36,10 @@ export const Navbar = () => {
       <div className="px-4 py-3 max-w-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className={`hidden sm:block text-[32px] text-white ${sacramento.className}`}>
-          <span className="text-cyan-400">Maxi</span>Life.org
+          <span className="text-cyan-400">Max</span>Life.org
         </Link>
         <Link href="/" className={`sm:hidden text-2xl text-white ${sacramento.className}`}>
-            <span className="text-cyan-400">Maxi</span>Life.org
+            <span className="text-cyan-400">Max</span>Life.org
         </Link>
 
         {/* Desktop Menu */}
