@@ -12,7 +12,8 @@ import {
   HeartPulse,
   Microscope,
   CheckCircle,
-  LucideIcon
+  LucideIcon,
+  ArrowRight
 } from 'lucide-react';
 
 // --- Interfaces ---
