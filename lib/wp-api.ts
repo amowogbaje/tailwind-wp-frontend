@@ -1,5 +1,5 @@
 // const WP = process.env.NEXT_PUBLIC_WP_URL;
-const WP = "https://blog.amowogbaje.org/";
+const WP = "https://blog.amowogbaje.com/";
 
 // ----------------------
 // Latest posts
